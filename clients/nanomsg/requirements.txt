@@ -1,1 +1,2 @@
+# need to install nanomsg
 nnpy
