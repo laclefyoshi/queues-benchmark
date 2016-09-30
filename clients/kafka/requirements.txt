@@ -1,0 +1,2 @@
+# need to install librdkafka https://github.com/edenhill/librdkafka
+confluent-kafka
