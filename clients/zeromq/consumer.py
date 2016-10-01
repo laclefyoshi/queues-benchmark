@@ -2,25 +2,25 @@
 # -*- coding: utf-8 -*-
 
 import timeit
-import nnpy
+import zmq
 
-NANO_HOST = "127.0.0.1"
-NANO_PORT = 5558
+ZMQ_HOST = "127.0.0.1"
+ZMQ_PORT = 5557
 MSGSIZE = (1000, 100000, 1000)  # min, max, step
 COUNT = 1000
 
-def test(size):
-    client = nnpy.Socket(nnpy.AF_SP, nnpy.PUSH)
-    client.connect("tcp://%s:%d" % (NANO_HOST, NANO_PORT))
-    msg = bytes("0" * size)
+def test():
+    context = zmq.Context()
+    client = context.socket(zmq.PULL)
+    client.connect("tcp://%s:%d" % (ZMQ_HOST, ZMQ_PORT))
     for i in range(0, COUNT):
-        client.send(msg)
+        msg = client.recv()
     client.close()
+    context.destroy()
 
 if __name__ == "__main__":
     for size in range(*MSGSIZE):
-        print("message size: %d" % size)
-        result = timeit.timeit("test(%d)" % size,
+        result = timeit.timeit("test()",
                                setup="from __main__ import test",
                                number=1)
         print("processing time: %f" % result)

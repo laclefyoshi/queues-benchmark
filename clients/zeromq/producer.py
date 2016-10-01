@@ -12,7 +12,7 @@ COUNT = 1000
 def test(size):
     context = zmq.Context()
     client = context.socket(zmq.PUSH)
-    client.bind("tcp://%s:%d" % (ZMQ_HOST, ZMQ_PORT))
+    client.connect("tcp://%s:%d" % (ZMQ_HOST, ZMQ_PORT))
     msg = bytes("0" * size)
     for i in range(0, COUNT):
         client.send(msg)

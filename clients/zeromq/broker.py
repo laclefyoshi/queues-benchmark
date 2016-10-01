@@ -11,13 +11,11 @@ ZMQ_HOST_SENDER_PORT = 5557
 
 class Broker(object):
     def __init__(self):
-        self.receiver = None
-        self.sender = None
         context = zmq.Context()
         self.receiver = context.socket(zmq.PULL)
-        self.receiver.connect("tcp://%s:%d" % (ZMQ_HOST, ZMQ_HOST_RECEIVER_PORT))
+        self.receiver.bind("tcp://%s:%d" % (ZMQ_HOST, ZMQ_HOST_RECEIVER_PORT))
         self.sender = context.socket(zmq.PUSH)
-        self.sender.connect("tcp://%s:%d" % (ZMQ_HOST, ZMQ_HOST_SENDER_PORT))
+        self.sender.bind("tcp://%s:%d" % (ZMQ_HOST, ZMQ_HOST_SENDER_PORT))
     def _send(self, msg):
         self.sender.send(msg[0])
     def start(self):
@@ -27,8 +25,8 @@ class Broker(object):
 def run():
     ioloop.install()
     broker = Broker()
-    broker.start()
     print("start zmq broker...")
+    broker.start()
     ioloop.IOLoop.instance().start()
 
 if __name__ == "__main__":
