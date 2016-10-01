@@ -19,7 +19,7 @@ class Broker(object):
     def start(self):
         while True:
             msg = self.receiver.recv()
-            _send(msg)
+            self._send(msg)
 
 def run():
     broker = Broker()
