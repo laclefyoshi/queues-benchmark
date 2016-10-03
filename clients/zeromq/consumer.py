@@ -13,10 +13,12 @@ def test():
     context = zmq.Context()
     client = context.socket(zmq.PULL)
     client.connect("tcp://%s:%d" % (ZMQ_HOST, ZMQ_PORT))
-    for i in range(0, COUNT):
+    while True:
         msg = client.recv()
-    client.close()
-    context.destroy()
+        if msg == "quit":
+            client.close()
+            context.destroy()
+            break
 
 if __name__ == "__main__":
     for size in range(*MSGSIZE):
