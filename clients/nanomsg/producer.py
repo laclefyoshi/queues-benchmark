@@ -15,6 +15,7 @@ def test(size):
     msg = bytes("0" * size)
     for i in range(0, COUNT):
         client.send(msg)
+    client.send("quit")
     client.close()
 
 if __name__ == "__main__":

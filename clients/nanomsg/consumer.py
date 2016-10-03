@@ -12,9 +12,11 @@ COUNT = 1000
 def test():
     client = nnpy.Socket(nnpy.AF_SP, nnpy.PULL)
     client.connect("tcp://%s:%d" % (NANO_HOST, NANO_PORT))
-    for i in range(0, COUNT):
+    while True:
         msg = client.recv()
-    client.close()
+        if msg == "quit":
+            client.close()
+            break
 
 if __name__ == "__main__":
     for size in range(*MSGSIZE):
