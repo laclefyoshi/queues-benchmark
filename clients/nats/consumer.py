@@ -12,7 +12,8 @@ MSGSIZE = (1000, 100000, 1000)  # min, max, step
 COUNT = 1000
 
 def handler(body):
-    print(body)
+    if body == "quit":
+        tornado.ioloop.IOLoop.instance().stop()
 
 def test():
     client = Client()

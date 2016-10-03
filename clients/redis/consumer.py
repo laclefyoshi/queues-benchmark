@@ -16,8 +16,8 @@ def test():
     subscriber.subscribe(TOPIC)
     i = 0
     for msg in subscriber.listen():
-        i += 1
-        if i >= COUNT:
+        if msg == "quit":
+            subscriber.close()
             break
 
 if __name__ == "__main__":

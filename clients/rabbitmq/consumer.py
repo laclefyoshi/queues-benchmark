@@ -10,11 +10,9 @@ RABBITMQ_PORT = 5672
 MSGSIZE = (1000, 100000, 1000)  # min, max, step
 COUNT = 1000
 
-i = 0
-
 def callback(chan, method, header, body):
-    i += 1
-    if i >= COUNT:
+    if body == "quit":
+        chan.stop_consuming()
         chan.close()
 
 def test():

@@ -18,6 +18,7 @@ def test(size):
     msg = "0" * size
     for i in range(0, COUNT):
         client.send(TOPIC, msg)
+    client.send(TOPIC, "quit")
     client.disconnect()
 
 if __name__ == "__main__":

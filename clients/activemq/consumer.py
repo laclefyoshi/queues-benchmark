@@ -17,10 +17,12 @@ def test():
     client = Stomp(config)
     client.connect()
     client.subscribe(TOPIC, {StompSpec.ACK_HEADER: StompSpec.ACK_CLIENT_INDIVIDUAL})
-    for i in range(0, COUNT):
+    while True:
         f = client.receiveFrame()
         client.ack(f)
-    client.disconnect()
+        if f.body == "quit":
+            client.disconnect()
+            break
 
 if __name__ == "__main__":
     for size in range(*MSGSIZE):
