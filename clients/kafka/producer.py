@@ -15,6 +15,7 @@ def test(size):
     msg = "0" * size
     for i in range(0, COUNT):
         producer.produce(TOPIC, msg)
+    producer.produce(TOPIC, "quit")
     producer.flush()
 
 if __name__ == "__main__":

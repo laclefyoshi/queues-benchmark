@@ -15,8 +15,10 @@ def test():
                          "group.id": "g",
                          "default.topic.config": {"auto.offset.reset": "largest"}})
     consumer.subscribe([TOPIC])
-    for i in range(COUNT):
+    while True:
         msg = consumer.poll()
+        if msg == "quit":
+            break
         if not msg.error():
             pass
         elif msg.error().code() != KafkaError._PARTITION_EOF:
