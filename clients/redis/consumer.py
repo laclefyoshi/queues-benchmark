@@ -16,7 +16,7 @@ def test():
     subscriber.subscribe(TOPIC)
     i = 0
     for msg in subscriber.listen():
-        if msg == "quit":
+        if msg["data"] == "quit":
             subscriber.close()
             break
 
