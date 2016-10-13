@@ -18,6 +18,7 @@ def test(size):
     for i in range(0, COUNT):
         client.publish(TOPIC, msg)
     client.publish(TOPIC, "quit")
+    client.close()
 
 if __name__ == "__main__":
     for size in range(*MSGSIZE):
