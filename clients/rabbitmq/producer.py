@@ -17,8 +17,8 @@ def test(size):
     chan.queue_declare(queue=TOPIC)
     msg = "0" * size
     for i in range(0, COUNT):
-        chan.basic_publish(exchange="", routing_key="-", body=msg)
-    chan.basic_publish(exchange="", routing_key="-", body="quit")
+        chan.basic_publish(exchange="", routing_key=TOPIC, body=msg)
+    chan.basic_publish(exchange="", routing_key=TOPIC, body="quit")
     con.close()
 
 if __name__ == "__main__":
