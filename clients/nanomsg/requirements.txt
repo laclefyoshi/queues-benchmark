@@ -1,2 +1,2 @@
-# need to install nanomsg
+# need to install cffi, nanomsg
 nnpy
